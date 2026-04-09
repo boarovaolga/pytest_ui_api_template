@@ -21,12 +21,16 @@ class MainPage:
          until(EC.visibility_of_element_located((
             By.CSS_SELECTOR, '[data-testid="nav-profile-button--content--details"]'))))
 
-        container = self.__driver.find_element(
-            By.CSS_SELECTOR, '[data-testid="nav-profile-button--content--details"]'
-                             '>div>div>div[2]')
+       # Ищем имя пользователя
+        name_element = self.__driver.find_element(
+            By.CSS_SELECTOR, '[data-testid="nav-profile-button--content--details--name"]'
+        )
+        name = name_element.text
 
-        fields = container.find_elements(By.CSS_SELECTOR, 'div')
-        name = fields[0].text
-        email = fields[1].text
+        # Ищем email пользователя
+        email_element = self.__driver.find_element(
+            By.CSS_SELECTOR, '[data-testid="nav-profile-button--content--details--email"]'
+        )
+        email = email_element.text
 
         return [name, email]
